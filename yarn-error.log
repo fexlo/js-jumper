@@ -1,0 +1,71 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\hoych\AppData\Roaming\nvm;C:\Program Files\nodejs;d:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\hoych\AppData\Local\Yarn\bin\;;D:\Program Files\TortoiseGit\bin;d:\Program Files (x86)\Tencent\微信web开发者工具\dll;C:\Users\hoych\AppData\Local\Microsoft\WindowsApps;C:\Users\hoych\AppData\Roaming\nvm;C:\Program Files\nodejs;D:\Program Files\Microsoft VS Code\bin;;C:\Users\hoych\AppData\Local\Programs\Fiddler;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  12.22.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND nexus.syounggroup.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+
+npm manifest: 
+  {
+    "name": "jsjumper",
+    "displayName": "jsjumper",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+      "vscode": "^1.73.0"
+    },
+    "categories": [
+      "Other"
+    ],
+    "activationEvents": [
+      "onCommand:jsjumper.helloWorld"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+      "commands": [
+        {
+          "command": "jsjumper.helloWorld",
+          "title": "Hello World"
+        }
+      ]
+    },
+    "scripts": {
+      "vscode:prepublish": "yarn run compile",
+      "compile": "tsc -p ./",
+      "watch": "tsc -watch -p ./",
+      "pretest": "yarn run compile && yarn run lint",
+      "lint": "eslint src --ext ts",
+      "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+      "@types/vscode": "^1.73.0",
+      "@types/glob": "^8.0.0",
+      "@types/mocha": "^10.0.0",
+      "@types/node": "16.x",
+      "@typescript-eslint/eslint-plugin": "^5.42.0",
+      "@typescript-eslint/parser": "^5.42.0",
+      "eslint": "^8.26.0",
+      "glob": "^8.0.3",
+      "mocha": "^10.1.0",
+      "typescript": "^4.8.4",
+      "@vscode/test-electron": "^2.2.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
