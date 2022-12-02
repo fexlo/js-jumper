@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-import JSJumper from './jsjumper';
+import JSJumper from './js-jumper';
 
 
 // This method is called when your extension is activated
@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // context.subscriptions.push(disposable);
 
-  const supportedLanguages = ['javascript'];
+  const supportedLanguages = ['javascript', 'typescript'];
   vscode.languages.registerDefinitionProvider(
     supportedLanguages,
     new JSJumper()

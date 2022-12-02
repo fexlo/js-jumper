@@ -4,6 +4,7 @@
  */
 import * as vscode from 'vscode';
 const path = require('path');
+const fs = require('fs');
 type ProvideDefinitionArgs = { document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken };
 type AliasConfigs = { [key: string]: string };
 export default class JSJumper implements vscode.DefinitionProvider {
@@ -90,19 +91,17 @@ export default class JSJumper implements vscode.DefinitionProvider {
     }
 
     function _polyImportPaths(uri: string, colls: string[]): string[] {
+      // 没有扩展名
       if (!matchedExt) {
-        // 没有扩展名 加上对所有需要查找的扩展名文件
-        if (fileName.search(/^index\.?/)) {
-          exts.forEach(ext => {
-            // 不是index文件 追加是index文件名
+        exts.forEach(ext => {
+          // 直接加上扩展名
+          colls.push(`${uri}.${ext}`);
+
+          // 不是index文件 将它看作目录 额外追加一个index.扩展名文件路径
+          if (fileName.search(/^index\.?/) === -1) {
             colls.push(`${uri}/index.${ext}`);
-          });
-        } else {
-          exts.forEach(ext => {
-            // 不是index文件 直接加上扩展名
-            colls.push(`${uri}.${ext}`);
-          });
-        }
+          }
+        });
       } else {
         colls.push(uri);
       }
@@ -140,19 +139,24 @@ export default class JSJumper implements vscode.DefinitionProvider {
       const currFileDir = document.fileName.match(/.+\\+/)?.[0] ?? '';
       // console.log('improtPaths', this.improtPaths);
       const res:vscode.Location[] = [];
+
+      // 找出当前工作区文件夹目录
+      const currentWorkSpaceDir = vscode.workspace.workspaceFolders?.filter(item => item.name === vscode.workspace.name)[0].uri.fsPath;
       this.improtPaths.forEach(uri => {
-        let batUri;
+        let batUri: string;
         if (/^(\.\/)|^[^\.\/]/.test(uri)) {
           // 相对路径
           batUri = path.resolve(currFileDir, uri);
         } else {
           // 绝对路径
-          // 找出当前工作区文件夹目录
-          const currentWorkSpaceDir = vscode.workspace.workspaceFolders?.filter(item => item.name === vscode.workspace.name)[0].uri.fsPath;
+
           // 将打头的/去除
           batUri = path.resolve(currentWorkSpaceDir, uri.replace(/^\//,''));
         }
-        res.push(new vscode.Location(vscode.Uri.file(batUri), new vscode.Position(0, 1)));
+        if (fs.existsSync(batUri)) {
+          console.log('batUri :>> ', batUri);
+          res.push(new vscode.Location(vscode.Uri.file(batUri), new vscode.Position(0, 1)));
+        }
       });
       if (res.length) {
         resolve(res);

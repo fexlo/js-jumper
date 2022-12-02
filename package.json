@@ -12,7 +12,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "js-jumper",
   "repository": {
@@ -33,7 +33,7 @@
   "contributes": {
     "commands": [],
     "configuration": {
-      "title": "JS-Jumper extension configuration",
+      "title": "js-jumper",
       "properties": {
         "js-jumper.aliasConfigs": {
           "type": "object",
@@ -43,7 +43,7 @@
           "items": {
             "type": "string"
           },
-          "description": "import alias config, based on workspace root directory"
+          "description": "When using path aliases, specify the alias path based on the workspace root"
         },
         "js-jumper.fileTypes": {
           "type": "array",
@@ -53,7 +53,7 @@
           "items": {
             "type": "string"
           },
-          "description": "required file extensions"
+          "description": "Specifies the file types to look for when goto define"
         }
       }
     }
