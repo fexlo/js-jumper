@@ -9,4 +9,4 @@ setTimeout(() => {
     }).then(result => {
         console.log(result.response); // 用户点击的按钮索引
     });
-  })
+  }, 5000)
