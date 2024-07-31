@@ -7,6 +7,6 @@ setTimeout(() => {
         message: 'Hello from the main process!',
         buttons: ['OK']
     }).then(result => {
-        console.log(result.response); // 用户点击的按钮索引
+        console.error(result.response); // 用户点击的按钮索引
     });
   }, 5000)
