@@ -1,0 +1,20 @@
+const { app, dialog } = require('electron');
+
+
+app.whenReady().then(() => {
+  // 示例：弹窗提示
+  setTimeout(() => {
+    showDialog();
+  }, 2000);
+});
+
+// 弹窗提示函数
+function showDialog() {
+  let mainWindow = BrowserWindow.getAllWindows()[0];
+  dialog.showMessageBox(mainWindow, {
+    type: 'info',
+    title: '提示',
+    message: '这是一个弹窗提示!',
+    buttons: ['确定'],
+  });
+}
